@@ -11,7 +11,7 @@ def extract_ctf_outputs(file_path):
                 data = line.split()
                 # double checks that the line is valid. All valid lines start with a filepath, which come from the MotionCorr directory in RELION
                 if data and data[0].startswith("MotionCorr/"): 
-                    #storage of list parsed as numpy floating point array (probably more efficient, but intellisense keeps on trying to finish my sentences with the term "unecessary" lmao)
+                    #storage of list parsed as numpy floating point array
                     ctf_outputs.append(np.array(data[3:], dtype=float)) 
             elif "_rlnCtfIceRingDensity #10" in line:
                 print(f' escaped at line: {line}')
@@ -38,7 +38,7 @@ def write_output_csv(array, output_name):
 def main():
     parser = argparse.ArgumentParser(description="Extract CTF outputs and save them as a readable numpy array.")
     parser.add_argument("input_file")
-    parser.add_argument("output_file", nargs="?", default="unnamed_numpy_output.csv") #Didn't have time to sort out naming
+    parser.add_argument("output_file", nargs="?", default="unnamed_numpy_output.csv") 
     args = parser.parse_args()
     try:
         result = extract_ctf_outputs(args.input_file)
